@@ -20,7 +20,7 @@ def init_connection():
     s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
     s.bind((sys.argv[1], reverse_endianness(SRC_PORT)))
     #send empty payload
-    s.sendto(b'', (RELAY_SERVER_IP, RELAY_SERVER_PORT))
+    s.sendto(b'Placeholder payload for discovery', (RELAY_SERVER_IP, RELAY_SERVER_PORT))
     return s
 
 def reverse_endianness(n : int) -> int:
@@ -36,9 +36,7 @@ def send_spoofed(remote_peer_ip, remote_peer_port, payload : bytes):
 def recv_loop(s : socket.socket):
     while(True):
         data = s.recvfrom(1024)
-        print("Recieved: ")
-        print(data[0])
-        print("\n")
+        print("Recieved: " + data[0].decode())
 
 
 
