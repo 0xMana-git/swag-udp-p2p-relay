@@ -33,10 +33,11 @@ def main():
     threading.Thread(target=recv_loop, args=(sock,),daemon=True).start()
 
     while(True):
-        peers = get_peers()
-        print(peers)
         #ping
         sock.sendto(b'Placeholder payload for discovery', (RELAY_SERVER_IP, RELAY_SERVER_PORT))
+        peers = get_peers()
+        print(peers)
+        
         time.sleep(1000)
         
 
