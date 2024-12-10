@@ -38,7 +38,7 @@ def main():
         peers = get_peers()
         print(peers)
         
-        time.sleep(1000)
+        time.sleep(1)
         
 
 
