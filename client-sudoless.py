@@ -37,7 +37,7 @@ def main():
         print(peers)
         #ping
         sock.sendto(b'Placeholder payload for discovery', (RELAY_SERVER_IP, RELAY_SERVER_PORT))
-        time.sleep(5000)
+        time.sleep(1000)
         
 
 
