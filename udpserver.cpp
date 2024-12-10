@@ -34,7 +34,7 @@ std::mutex peers_lock;
 std::unordered_set<std::string> peers;
 std::string serialize_peers() {
     std::lock_guard lock(peers_lock);
-    std::string res;
+    std::string res = "";
     for(const std::string& p : peers) {
         res += p + "\n";
     }
