@@ -1,9 +1,9 @@
-from scapy.all import *
 import socket
 import requests
 import threading
 import sys
 from cfg import *
+import time
 
 
 def get_peers():
@@ -20,11 +20,6 @@ def init_connection():
 def reverse_endianness(n : int) -> int:
     return int.from_bytes(n.to_bytes(2), "little")
 
-def send_spoofed(remote_peer_ip, remote_peer_port, payload : bytes):
-    #somehow dport works properly? idk
-    remote_peer_port = reverse_endianness(remote_peer_port)
-    packet = IP(src=remote_peer_ip, dst=RELAY_SERVER_IP)/UDP(sport=remote_peer_port, dport=RELAY_SERVER_PORT)/Raw(load=payload)
-    send(packet)
 
 
 def recv_loop(s : socket.socket):
@@ -39,17 +34,9 @@ def main():
 
     while(True):
         peers = get_peers()
+        print(peers)
+        time.sleep(5000)
         
-        payload = "hello :D"
-
-        for peer in peers:
-            payload = input(f"Enter payload for {peer}: ")
-            if(len(payload) == 0):
-                continue
-            peer = peer.split(":")
-            send_spoofed(peer[0], int(peer[1]), payload)
-    
-
 
 
 
